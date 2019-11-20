@@ -2,8 +2,8 @@
 
 O que precisamos fazer :
 
-(1) Inserir filme ---------------------- TODO
-(2) Buscar filme pelo id --------------- TODO
+<div>(1) Inserir filme ---------------------- TODO</div>
+<div>(2) Buscar filme pelo id --------------- TODO</div>
 (3) Buscar filmes pelo ano ------------- TODO
 (4) Listar filmes em ordem alfabética
 (5) Altura da árvore ------------------- TODO
