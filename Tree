@@ -1,0 +1,28 @@
+class avl:
+    def __init__(self, dado = None):
+      self._dado = dado
+      
+      
+    def menu(self):
+        input(""" 
+
+\033[1;34m________________________________________\033[m
+\033[1;34m\033[m  \033[1;36m0)\033[m \033[1;31msair do Menu\033[m               \033[1;34m\033[m 
+\033[1;34m\033[m  \033[1;36m1)\033[m Inserir filme                  \033[1;34m\033[m 
+\033[1;34m\033[m  \033[1;36m2)\033[m Buscar filme pelo id                   \033[1;34m\033[m 
+\033[1;34m\033[m  \033[1;36m3)\033[m Buscar filmes pelo ano      \033[1;34m\033[m 
+\033[1;34m\033[m  \033[1;36m4)\033[m Listar filmes em ordem alfabética 
+   \033[1;34m\033[m 
+\033[1;34m\033[m  \033[1;36m5)\033[m Altura da árvore 
+              \033[1;34m\033[m 
+\033[1;34m\033[m  \033[1;36m6)\033[m Exibir a árvore         \033[1;34m\033[m 
+\033[1;34m________________________________________\033[m 
+\033[1;31m🔴\033[m Digite sua opção: 
+""")
+          
+    
+   
+ arv = avl()
+ resp = arv.menu()
+ while resp != 0:
+      resp = arv.menu()
