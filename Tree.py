@@ -38,6 +38,23 @@ class avl:
                     break
             if atual != None:
                 print(atual.dado.get_filmeeano())
+    def buscaano(self, ano):
+        if self._root == None:
+            print('Arvore Vazia')
+        else:
+            atual = self._root
+            while atual.dado.get_ano() != ano:
+                if ano < atual.dado.get_ano():
+                    atual = atual.left
+                elif ano > atual.dado.get_ano():
+                    atual = atual.right
+                if atual == None:
+                    print('Não encontrada')
+                    break
+            if atual != None:
+                print(atual.dado.get_filmeeano())
+
+        
     def altura(self):
         atual = self._root
         if atual == None:
@@ -76,7 +93,8 @@ while resp != '0':
         chave = int(input('Chave Buscada: '))
         arv.buscaid(chave)
     if resp == '3' :
-        print('Buscar filmes pelo ano ')
+        ano = int(input('Ano Buscado: '))
+        arv.buscaano(ano)
     if resp == '4' :
         print('Listar filmes em ordem alfabética ')
     if resp == '5' :
