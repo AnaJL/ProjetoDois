@@ -55,14 +55,22 @@ class avl:
                 print(atual.dado.get_filmeeano())
 
         
-    def altura(self):
-        atual = self._root
+    def altura(self, atual):  #atual = root, ta na entrada
         if atual == None:
-            return 'Arvore vazia'
+            return -1
         elif atual.left == None and atual.right == None:
-            return '-1'
-        #TODO
-            
+            return 0
+        else:
+            if self.altura(atual.left) > self.altura(atual.right):
+                return self.altura(atual.right) + 1
+            else:
+                return self.altura(atual.right) + 1
+
+    def emordem(self, atual): #atual = root, ta na entrada !
+        if atual != None:
+            self.emordem(atual.left)
+            print(f'chave: {atual.dado.get_id()}')
+            self.emordem(atual.right)
                     
     def __str__(self):
         return str(self._dado)
@@ -98,9 +106,9 @@ while resp != '0':
     if resp == '4' :
         print('Listar filmes em ordem alfabética ')
     if resp == '5' :
-        print(f'Altura: {arv.altura()}')
+        print(f'Altura: {arv.altura(arv._root)}')
     if resp == '6' :
-        print('Exibir a árvore')
+        arv.emordem(arv._root)
     if resp not in ['0','1','2','3','4','5','6']:
         print('Comando invalido')
     resp = arv.menu()
