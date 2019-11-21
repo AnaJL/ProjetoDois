@@ -9,12 +9,13 @@ class avl:
         atual = self._root
         if self._root == None:
             self._root = no
-        elif atual.get_dado.get_id() > no.get_dado().get_id():
-            while atual.get_left != None:
-                if atual.get_left == None:  #se o filho esquerdo estiver disponivel, o no vai na posição
-                atual.set_proximo(no)
-                if atual.get_dado.get_id() > no.get_dado().get_id(): #caminhar para esquerda 
+        elif atual.get_dado().get_id() > no.get_dado().get_id():     
+            while atual.get_left() != None:
+                if atual.get_dado().get_id() > no.get_dado().get_id(): #caminhar para esquerda 
                     atual = atual.get_left()
+            if atual.get_left() == None:  #se o filho esquerdo estiver disponivel, o no vai na posição
+                    atual.set_left(no)
+                    
 
                 
     def __str__(self):

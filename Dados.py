@@ -13,13 +13,13 @@ class Dado:
         self._ano = new
     def set_id(self, new):
          self._id = new
-    def get_id(self, new):
+    def get_id(self):
         return self._id
     def set_filmeeano(self,newfil, newano):
         self._filme = newfil
         self._ano = newano
     def get_filmeeano(self):
         return f'''FILME: {self._filme}
-                   ANO: {self._ano}
-                   CHAVE: {self._id}'''
+ANO: {self._ano}
+CHAVE: {self._id}'''
     
