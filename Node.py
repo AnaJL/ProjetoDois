@@ -12,16 +12,10 @@ class No:
     def get_left(self):
         return self._left
     def set_left(self, outro):
-        if self.get_left() != None:
-            print('Nó ja existe !')
-        else:
-            self._left = outro
+        self._left = outro
     def get_right(self):
         return self._right
     def set_right(self, outro):
-        if self.get_right() != None:
-            print('Nó ja existe !')
-        else:
-            self._right = outro
+        self._right = outro
     def __str__(self):
         return str(self._dado)
