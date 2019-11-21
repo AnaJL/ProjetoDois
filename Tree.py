@@ -8,7 +8,8 @@ class avl:
         no = No(novo)
         if self._root == None:
             self._root = no
-            print('Foi adicionado com sucesso !')
+            return 'Foi adicionado com sucesso !'
+        
         else:
             atual = self._root
             while atual != None:
@@ -17,11 +18,13 @@ class avl:
                     atual = atual.left
                     if atual == None:
                         ant.left = no
-                else:                                   #indo p/ direita
+                elif novo.get_id() > atual.dado.get_id():                                  #indo p/ direita
                     atual = atual.right
                     if atual == None:
                         ant.right = no
-            print('Foi adicionado com sucesso !')
+                else:
+                    return f'O ID {novo.get_id()} já existe !'
+            return 'Foi adicionado com sucesso !'
             
     def buscaid(self, ide):
         if self._root == None:
@@ -96,7 +99,7 @@ while resp != '0':
         ano = int(input('Ano: '))
         chave = int(input('Chave: '))
         novo = Dado(filme, ano, chave)
-        arv.inserir(novo)
+        print(arv.inserir(novo))
     if resp == '2' :
         chave = int(input('Chave Buscada: '))
         arv.buscaid(chave)
@@ -104,7 +107,8 @@ while resp != '0':
         ano = int(input('Ano Buscado: '))
         arv.buscaano(ano)
     if resp == '4' :
-        print('Listar filmes em ordem alfabética ')
+        a = None
+        print(arv.OrdemAlfa(a))
     if resp == '5' :
         print(f'Altura: {arv.altura(arv._root)}')
     if resp == '6' :
