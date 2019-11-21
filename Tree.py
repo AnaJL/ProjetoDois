@@ -62,7 +62,7 @@ class avl:
             return 0
         else:
             if self.altura(atual.left) > self.altura(atual.right):
-                return self.altura(atual.right) + 1
+                return self.altura(atual.left) + 1
             else:
                 return self.altura(atual.right) + 1
 
