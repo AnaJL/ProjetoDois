@@ -9,15 +9,15 @@ class avl:
         atual = self._root
         if self._root == None:
             self._root = no
+            print( self._root.get_dado().get_filmeeano() )
         elif atual.get_dado().get_id() > no.get_dado().get_id():     
             while atual.get_left() != None:
                 if atual.get_dado().get_id() > no.get_dado().get_id(): #caminhar para esquerda 
                     atual = atual.get_left()
             if atual.get_left() == None:  #se o filho esquerdo estiver disponivel, o no vai na posição
                     atual.set_left(no)
-                    
-
-                
+                    print( atual.get_left().get_dado().get_filmeeano() ) #só para provar que estão sendo adicionados
+              
     def __str__(self):
         return str(self._dado)
     def menu(self):
