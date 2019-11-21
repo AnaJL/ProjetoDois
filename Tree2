@@ -1,0 +1,169 @@
+from Node import No
+from Dados import Dado
+
+
+class avl:
+    def __init__(self, dado=None):
+        self._root = dado
+
+    def inserir(self, novo):
+        no = No(novo)
+        if self._root == None:
+            self._root = no
+            print('Foi adicionado com sucesso !')
+        else:
+            atual = self._root
+            while atual != None:
+                ant = atual
+                if novo.get_id() < atual.dado.get_id():  # indo p/ left
+                    atual = atual.left
+                    if atual == None:
+                        ant.left = no
+                else:  # indo p/ right
+                    atual = atual.right
+                    if atual == None:
+                        ant.right = no
+            print('Foi adicionado com sucesso !')
+
+    def buscaid(self, ide):
+        if self._root == None:
+            print('Arvore Vazia')
+        else:
+            atual = self._root
+            while atual.dado.get_id() != ide:
+                if ide < atual.dado.get_id():
+                    atual = atual.left
+                elif ide > atual.dado.get_id():
+                    atual = atual.right
+                if atual == None:
+                    print('Não encontrada')
+                    break
+            if atual != None:
+                print(atual.dado.get_filmeeano())
+
+    def buscaano(self, ano):
+        if self._root == None:
+            print('Arvore Vazia')
+        else:
+            atual = self._root
+            while atual.dado.get_ano() != ano:
+                if ano < atual.dado.get_ano():
+                    atual = atual.left
+                elif ano > atual.dado.get_ano():
+                    atual = atual.right
+                if atual == None:
+                    print('Não encontrada')
+                    break
+            if atual != None:
+                print(atual.dado.get_filmeeano())
+
+    def profundidade(self):
+        prof_esq = 0
+        atual = self._root
+        if atual.left:
+            prof_esq = atual.left.profundidade()
+        prof_dir = 0
+        if atual.right:
+            prof_dir = atual.right.profundidade()
+        return 1 + max(prof_esq, prof_dir)
+    def balanco(self):
+        prof_esq = 0
+        atual = self._root
+        if atual.left:
+            prof_esq = atual.left.profundidade()
+        prof_dir = 0
+        if atual.right:
+            prof_dir = atual.right.profundidade()
+        return prof_esq - prof_dir
+    def altura(self):
+        atual = self._root
+        if atual == None:
+            return 'Arvore vazia'
+        elif atual.left == None and atual.right == None:
+            return '-1'
+
+    def rotacao_left(self):
+        atual = self._root
+        aux = atual.right
+        atual.right(aux.get_left())
+        aux.left(atual)
+        return aux
+
+    def rotacao_right(self):
+        atual = self._root
+        aux = atual.left
+        atual.left(aux.set_right())
+        aux.rigth(atual)
+        return aux
+
+    def rotacaoLeftRight(self,arvore):
+        arvore.left.rotacao_left()
+        arvore.rotacao_right()
+
+    def rotacaoRightLeft(self,arvore):
+        arvore.right.rotacao_right()
+        arvore.rotacao_left()
+
+    def balancoExe(self):
+        atual = self._root
+        bal = self.balanco()
+        if bal > 1:
+            if atual.left.balanco() > 0:
+                atual.rotacao_right()
+            else:
+                atual.rotacaoLeftRight()
+        elif bal < -1:
+            if atual.right.balanco() < 0:
+                atual.rotacao_left()
+            else:
+                atual.rotacaoRightLeft()
+    def imprimeArvore(self, indent = 0):
+        print (str(self._root))
+        atual = self._root
+        if atual.left:
+            atual.left.imprimeArvore(indent + 2)
+        if atual.right:
+            atual.right.imprimeArvore(indent + 2)
+    def __str__(self):
+        return str(self._root)
+
+    def menu(self):
+        return input(""" 
+0) sair do Menu
+1) Inserir filme
+2) Buscar filme pelo id    
+3) Buscar filmes pelo ano  
+4) Listar filmes em ordem alfabética 
+5) Altura da árvore 
+6) Exibir a árvore
+Digite sua opção: 
+""")
+
+
+arv = avl()
+resp = arv.menu()
+while resp != '0':
+    if resp == '1':
+        filme = input('Filme: ')
+        ano = int(input('Ano: '))
+        chave = int(input('Chave: '))
+        novo = Dado(filme, ano, chave)
+        arv.inserir(novo)
+    if resp == '2':
+        chave = int(input('Chave Buscada: '))
+        arv.buscaid(chave)
+    if resp == '3':
+        ano = int(input('Ano Buscado: '))
+        arv.buscaano(ano)
+    if resp == '4':
+        print('Listar filmes em ordem alfabética ')
+
+    if resp == '5':
+        print(f'Altura: {arv.altura()}')
+    if resp == '6':
+        print('Exibir a árvore')
+
+    if resp not in ['0', '1', '2', '3', '4', '5', '6']:
+        print('Comando invalido')
+    resp = arv.menu()
+print('Fim')
