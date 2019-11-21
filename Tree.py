@@ -6,25 +6,47 @@ class avl:
             self._root = dado
     def inserir(self, novo):
         no = No(novo)
-        atual = self._root
         if self._root == None:
             self._root = no
-            print( self._root.get_dado().get_filmeeano() )
-        elif atual.get_dado().get_id() > no.get_dado().get_id():   #só considera o novodado como o menor adicionado  
-            while atual.get_left() != None:
-                if atual.get_dado().get_id() > no.get_dado().get_id():
-                    atual = atual.get_left()
-            if atual.get_left() == None:
-                atual.set_left(no)
-                print( atual.get_left().get_dado().get_filmeeano() )
-        elif atual.get_dado().get_id() < no.get_dado().get_id():     #só considera o novodado como o maior adicionado 
-            while atual.get_right() != None:
-                if atual.get_dado().get_id() < no.get_dado().get_id():
-                    atual = atual.get_right()
-            if atual.get_right() == None:
-                atual.set_right(no)
-                print( atual.get_right().get_dado().get_filmeeano() )
-                              
+            print('Foi adicionado com sucesso !')
+        else:
+            atual = self._root
+            while atual != None:
+                ant = atual
+                if novo.get_id() < atual.dado.get_id(): #indo p/ esquerda
+                    atual = atual.left
+                    if atual == None:
+                        ant.left = no
+                else:                                   #indo p/ direita
+                    atual = atual.right
+                    if atual == None:
+                        ant.right = no
+            print('Foi adicionado com sucesso !')
+            
+    def buscaid(self, ide):
+        if self._root == None:
+            print('Arvore Vazia')
+        else:
+            atual = self._root
+            while atual.dado.get_id() != ide:
+                if ide < atual.dado.get_id():
+                    atual = atual.left
+                elif ide > atual.dado.get_id():
+                    atual = atual.right
+                if atual == None:
+                    print('Não encontrada')
+                    break
+            if atual != None:
+                print(atual.dado.get_filmeeano())
+    def altura(self):
+        atual = self._root
+        if atual == None:
+            return 'Arvore vazia'
+        elif atual.left == None and atual.right == None:
+            return '-1'
+        #TODO
+            
+                    
     def __str__(self):
         return str(self._dado)
     def menu(self):
@@ -51,13 +73,14 @@ while resp != '0':
         novo = Dado(filme, ano, chave)
         arv.inserir(novo)
     if resp == '2' :
-        print('Buscar filme pelo id')
+        chave = int(input('Chave Buscada: '))
+        arv.buscaid(chave)
     if resp == '3' :
         print('Buscar filmes pelo ano ')
     if resp == '4' :
         print('Listar filmes em ordem alfabética ')
     if resp == '5' :
-        print('Altura da árvore ')
+        print(f'Altura: {arv.altura()}')
     if resp == '6' :
         print('Exibir a árvore')
     if resp not in ['0','1','2','3','4','5','6']:
