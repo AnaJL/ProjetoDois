@@ -1,32 +1,31 @@
 from tkinter import *
 from Dados import *
 from Node import  *
+from random import randint
 def button1_click():
     filme = ed1.get()
     ano = ed2.get()
-    Dado(filme,ano)
+    chave = randint(1,1000)
+    Dado(filme,ano,chave)
     lb["text"] = "Inserido com sucesso!"
 def button2_click():
     print("bt_click")
 janela = Tk() #Cria a janela
 ed1 = Entry(janela)
-ed1.place(x = 300, y =100)
+ed1.place(x = 100, y =100)
 ed2 = Entry(janela)
-ed2.place(x = 300, y =150)
+ed2.place(x=100, y= 150)
 ed3 = Entry(janela)
-ed3.place(x = 300, y =200)
-ed4 = Entry(janela)
-ed4.place(x = 300, y =250)
+ed3.place(x=100,y=200)
 janela.title("Árvore AVL")
-janela["bg"] = "gray"
-bt1 = Button(janela, width = 20, text = "Inserir filme", command = button1_click)
-bt1.place(x = 100, y = 100)
-bt2 = Button(janela, width = 20, text = "Buscar filme pelo id  ", command = button1_click)
-bt2.place(x = 100, y = 150)
-bt3 = Button(janela, width = 20, text = "Buscar filmes pelo ano ", command = button1_click)
-bt3.place(x = 100, y = 200)
-bt4 = Button(janela, width = 20, text = "sair do Menu", command = quit)
-bt4.place(x = 100, y = 250)
+bt1 = Button(janela, width = 20, text = "Inserir Filme", command = button1_click)
+bt1.place(x = 200, y = 250)
+lbFilme = Label(janela, text= "Filme: ")
+lbFilme.place(x = 50, y=100)
+lbAno = Label(janela, text= "Ano: ")
+lbAno.place(x=50, y= 150)
+lbChave = Label(janela, text="Chave: ")
+lbChave.place(x=50, y=200)
 lb = Label(janela, text = "A Resposta irá aparecer aqui!")
 lb.place(x=200, y= 50)
 #largura x Altura + Esquerda do vídeo+ Topo do vídeo
