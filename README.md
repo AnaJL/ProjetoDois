@@ -1,4 +1,4 @@
-# ProjetoDois  02/12 (Faltam 09 dias)
+# ProjetoDois  02/12 (Faltam 08 dias)
 
 O que precisamos fazer :
 <H1>( 2 / 7 )</H1>
