@@ -102,12 +102,23 @@ class No:
                 self.Rotacionar_Esquerda()
             else:
                 self.Rotacionar_Direita_Esquerda()
-    def imprimeArvoreAvl(self, espaco = 0):
-        print(" " * espaco + str(self._dado._dado.get_id()))
-        if self._esquerda:
-            self._esquerda.imprimeArvore(espaco + 2)
-        if self._direita:
-            self._direita.imprimeArvore(espaco + 2)
+
+
+    def imprimeArvoreAvl(self, pos, espaco = 10 ):
+        if pos == 'ext':
+            print(" " * espaco + str(self._dado._id))
+            if self._esquerda:
+                self._esquerda.imprimeArvoreAvl('inter', espaco - 4)
+            if self._direita:
+                self._direita.imprimeArvoreAvl('inter', espaco + 4)
+        else:
+            print(" " * espaco + str(self._id))
+            if self._esquerda:
+                self._esquerda.imprimeArvoreAvl('inter', espaco - 4)
+            if self._direita:
+                self._direita.imprimeArvoreAvl('inter', espaco + 4)
+
+
     def altura(self, atual):  # atual = root, ta na entrada
         if atual == None:
             return -1
@@ -181,7 +192,7 @@ while resp != '0':
     if resp == '5':
         print(f'Altura: {arv.altura(arv.root)}')
     if resp == '6':
-        arv.imprimeArvoreAvl()
+        arv.imprimeArvoreAvl('ext')
     if resp not in ['0', '1', '2', '3', '4', '5', '6']:
         print('Comando invalido')
     resp = arv.menu()
