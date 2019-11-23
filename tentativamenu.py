@@ -32,6 +32,10 @@ def inserir():
         text2.configure(text = a)
 def alfabeto():
     text2.configure(text = "a")
+def buscar():
+    text2.configure(text="a")
+def buscarAno():
+    text2.configure(text="a")
 
 text_inp = Label(text = "Filme: ")
 text_inp.grid(column = 1, row = 3)
@@ -50,7 +54,7 @@ inp2.grid(column = 2, row = 4)
 
 
 text2 = Label(text = '')
-text2.grid(column = 3, row = 4)
+text2.grid(column = 2, row = 7)
 
 ordem = Button(text = "Em Ordem", command = emordem, width = 15)
 ordem.grid(column = 0, row = 4, padx = 10, pady = 5)
@@ -60,11 +64,18 @@ altura.grid(column = 0, row = 3, padx = 10, pady = 5)
 
 
 inserir = Button(text = "Inserir", command = inserir, width = 15)
-inserir.grid(column = 3, row = 10, padx = 10, pady = 5)
+inserir.grid(column = 3, row = 5, padx = 10, pady = 5)
 
 ordenar = Button(text = "Ordem Alfabetica", command = alfabeto, width = 15)
 ordenar.grid(column = 0, row = 5, padx = 10, pady = 5)
 
+buscar = Button(text = "buscar pelo id", command = buscar, width = 15)
+buscar.grid(column = 0, row = 6, padx = 10, pady = 5)
 
+buscarAno = Button(text = "buscar pelo ano", command = buscarAno, width = 15)
+buscarAno.grid(column = 0, row = 7, padx = 10, pady = 5)
+
+sair = Button(text = "Sair", command = quit, width = 15)
+sair.grid(column = 0, row = 8, padx = 10, pady = 5)
 
 root.mainloop()
