@@ -150,7 +150,6 @@ class No:
                 Sup = met - 1
             else:
                 Inf = met + 1
-
         return 'Chave não encontrada'
     def buscaano(self, ano, anos, lista):
         Inf = 0
@@ -159,13 +158,14 @@ class No:
         while (Inf <= Sup):
             met = (Inf + Sup) // 2
             if (anos[met] == ano):
-                return lista[met].get_filmeeano()
+                for i in range(anos.count(ano)-1):
+                    print(lista[met + i].get_filme())
             if (ano < anos[met]):
                 Sup = met - 1
             else:
                 Inf = met + 1
-
-        return 'Chave não encontrada'
+        if ano not in anos:
+            print('Chave não encontrada')
 
     def menu(self):
         return input(""" 
@@ -212,7 +212,7 @@ while resp != '0':
         print(arv.buscaid(ide, listachaves, listaD))
     if resp == '3':
         ano = int(input('ANO procurado : '))
-        print(arv.buscaano(ano, listaanos, listaD))
+        arv.buscaano(ano, listaanos, listaD)
     if resp == '4':
         arv.OrdemAlfa(listafilmes)
     if resp == '5':
@@ -223,4 +223,3 @@ while resp != '0':
         print('✘ Comando invalido ✘')
     resp = arv.menu()
 print('Fim')
-
