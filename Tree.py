@@ -2,59 +2,84 @@ from Dados import Dado
 
 
 class No:
-    def __init__(self, dado=None, ide=None, filho=None, esquerda=None, direita=None):
+    def __init__(self, dado=None, ide=None):
         self._dado = dado
         self._id = ide
-        self._filho = filho
+        self.setaFilhos(None, None)
+
+    def setaFilhos(self, esquerda, direita):
         self._esquerda = esquerda
         self._direita = direita
-
-    def get_esquerda(self):
-        return self._esquerda
 
     def set_esquerda(self, novo):
         self._esquerda = novo
 
-    def get_direita(self):
-        return self._direita
-
     def set_direita(self, novo):
         self._direita = novo
-
     def profundidade(self):
         prof_esq = 0
         prof_dir = 0
         if self._dado == None:
             return -1
-        if self._esquerda == None and self._direita == None:
+        elif (self._esquerda == None) and (self._direita == None):
             return 0
         else:
-            if self.get_esquerda():
-                prof_esq = self.get_esquerda().profundidade()
-            if self.get_direita():
-                prof_dir = self.get_direita().profundidade()
+            if self._esquerda:
+                prof_esq = self._esquerda.profundidade()
+            if self._direita:
+                prof_dir = self._direita.profundidade()
             return 1 + max(prof_esq, prof_dir)
 
-    def verBalanco(self):
-        profundidade_esquerda = 0
-        profundidade_direita = 0
-        if self.get_esquerda():
-            profundidade_esquerda = self.get_esquerda().profundidade()
-        if self.get_direita():
-            profundidade_direita = self.get_direita().profundidade()
-        return profundidade_esquerda - profundidade_direita
+    def balanco(self):
+        prof_esq = 0
+        if self._esquerda:
+            prof_esq = self._esquerda.profundidade()
+        prof_dir = 0
+        if self._direita:
+            prof_dir = self._direita.profundidade()
+        return prof_esq - prof_dir
 
-    def Rotacionar_Esquerda(self):
-        aux = self._dado.get_direita()
-        self._dado.set_direita(aux._esquerda())
-        aux.set_esquerda(self._dado)
-        return aux
+    def profundidade(self):
+        prof_esq = 0
+        if self._esquerda:
+            prof_esq = self._esquerda.profundidade()
+        prof_dir = 0
+        if self._direita:
+            prof_dir = self._direita.profundidade()
+        return 1 + max(prof_esq, prof_dir)
 
-    def Rotacionar_Direita(self):
-        aux = self._dado.get_esquerda()
-        self._dado.set_esquerda(aux.set_direita())
-        aux.set_direita(self._dado)
-        return aux
+    def rotacaoEsquerda(self):
+        self._dado, self._direita._dado = self._direita._dado, self._dado
+        old_esquerda = self._esquerda
+        self.setaFilhos(self._direita, self._direita._direita)
+        self._esquerda.setaFilhos(old_esquerda, self._esquerda._esquerda)
+
+    def rotacaoDireita(self):
+        self.data, self._esquerda._dado= self._esquerda._dado, self._dado
+        old_direita = self._direita
+        self.setaFilhos(self._esquerda._esquerda, self._esquerda)
+        self._direita.setaFilhos(self._direita._direita, old_direita)
+
+    def rotacaoEsquerdaDireita(self):
+        self._esquerda.rotacaoEsquerda()
+        self.rotacaoDireita()
+
+    def rotacaoDireitaEsquerda(self):
+        self._direita.rotacaoDireita()
+        self.rotacaoEsquerda()
+
+    def executaBalanco(self):
+        bal = self.balanco()
+        if bal > 1:
+            if self._esquerda.balanco() > 0:
+                self.rotacaoDireita()
+            else:
+                self.rotacaoEsquerdaDireita()
+        elif bal < -1:
+            if self._direita.balanco() < 0:
+                self.rotacaoEsquerda()
+            else:
+                self.rotacaoDireitaEsquerda()
 
     def OrdemAlfa(self, lista):
         if lista == []:
@@ -71,72 +96,47 @@ class No:
     def inserir(self, elem, pos):
         if self._dado == None:
             self._dado = elem
-            return 'Foi adicionado a raiz com sucesso ! ✔'
-        if pos == 'inte':
+        elif pos == 'inte':
             if elem._id < self._id:
                 if not self._esquerda:
                     self.set_esquerda(elem)
                 else:
                     self._esquerda.inserir(elem, 'inte')
-                return 'Foi adicionado com sucesso ✔!'
             else:
                 if not self._direita:
                     self.set_direita(elem)
                 else:
                     self._direita.inserir(elem, 'inte')
-                return 'Foi adicionado com sucesso ✔!'
-        if pos == 'ext':
+        elif pos == 'ext':
             if elem._id < self._dado._id:
                 if not self._esquerda:
                     self.set_esquerda(elem)
                 else:
                     self._esquerda.inserir(elem, 'inte')
-                return 'Foi adicionado com sucesso ✔!'
             else:
                 if not self._direita:
                     self.set_direita(elem)
                 else:
                     self._direita.inserir(elem, 'inte')
-                return 'Foi adicionado com sucesso ✔ !'
 
-        self.Balanceamento()
-
-    def Rotacionar_Esquerda_Direita(self):
-        self.get_esquerda().Rotacionar_Esquerda()
-        self.Rotacionar_Direita()
-
-    def Rotacionar_Direita_Esquerda(self):
-        self.get_direita().Rotacionar_Direita()
-        self.Rotacionar_Direita()
-
-    def Balanceamento(self):
-        balancear = self.verBalanco()
-        if balancear > 1:
-            if self.get_esquerda().balanco() > 0:
-                self.Rotacionar_Direita()
-            else:
-                self.Rotacionar_Esquerda_Direita()
-        elif balancear < -1:
-            if self.get_direita().balanco < 0:
-                self.Rotacionar_Esquerda()
-            else:
-                self.Rotacionar_Direita_Esquerda()
+            self.executaBalanco()
 
     def imprimeArvoreAvl(self, pos, espaco=10):
         if self._dado == None:
             print('Árvore Vazia !')
-        elif pos == 'ext':
-            print(" " * espaco + str(self._dado._id))
-            if self._esquerda:
-                self._esquerda.imprimeArvoreAvl('inter', espaco - 4)
-            if self._direita:
-                self._direita.imprimeArvoreAvl('inter', espaco + 4)
         else:
-            print(" " * espaco + str(self._id))
-            if self._esquerda:
-                self._esquerda.imprimeArvoreAvl('inter', espaco - 4)
-            if self._direita:
-                self._direita.imprimeArvoreAvl('inter', espaco + 4)
+            if pos == 'ext':
+                print(" " * espaco + str(self._dado._id))
+                if self._esquerda:
+                    self._esquerda.imprimeArvoreAvl('inter', espaco - 4)
+                if self._direita:
+                    self._direita.imprimeArvoreAvl('inter', espaco + 4)
+            else:
+                print(" " * espaco + str(self._id))
+                if self._esquerda:
+                    self._esquerda.imprimeArvoreAvl('inter', espaco - 4)
+                if self._direita:
+                    self._direita.imprimeArvoreAvl('inter', espaco + 4)
 
     def buscaid(self, chave, chaves, lista):
         Inf = 0
@@ -182,7 +182,6 @@ class No:
 | 5) Altura da árvore                         |
 | 6) Exibir a árvore                          |
 |_____________________________________________|
-
  ▸ Digite sua opção: 
 """)
 
@@ -206,7 +205,8 @@ while resp != '0':
             listafilmes.append(filme)
             listachaves.append(chave)
             listaanos.append(ano)
-            print(arv.inserir(novo, 'ext'))
+            arv.inserir(novo, 'ext')
+            print('Adicionado com Sucesso !')
     if resp == '2':
         ide = int(input('ID procurado : '))
         print(arv.buscaid(ide, listachaves, listaD))
