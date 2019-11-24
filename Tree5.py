@@ -1,4 +1,4 @@
-    from Dados import Dado
+from Dados import Dado
 class No:
     def __init__(self,dado = None, ide = None, filho = None, esquerda = None, direita = None):
         self._dado = dado
@@ -117,17 +117,6 @@ class No:
             if self._direita:
                 self._direita.imprimeArvoreAvl('inter', espaco + 4)
 
-    def altura(self, atual):  # atual = root, ta na entrada
-        if atual == None:
-            return -1
-        elif atual.left == None and atual.right == None:
-            return 0
-        else:
-            if self.altura(atual.left) > self.altura(atual.right):
-                return self.altura(atual.left) + 1
-            else:
-                return self.altura(atual.right) + 1
-
     def buscaid(self, ide):
         if self._dado == None:
             print('Arvore Vazia')
@@ -201,7 +190,7 @@ while resp != '0':
     if resp == '4':
         arv.OrdemAlfa(listafilmes)
     if resp == '5':
-        arv.imprimeArvoreAvl('ext')
+        print(arv.profundidade())
     if resp == '6':
         arv.imprimeArvoreAvl('ext')
     if resp not in ['0', '1', '2', '3', '4', '5', '6']:
