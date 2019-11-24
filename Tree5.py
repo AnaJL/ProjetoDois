@@ -21,7 +21,7 @@ class No:
             prof_esq = self.get_esquerda().profundidade()
         if self.get_direita():
             prof_dir = self.get_direita().profundidade()
-        return max(prof_esq, prof_dir)
+        return 1 + max(prof_esq, prof_dir)
     def verBalanco(self):
         profundidade_esquerda = 0
         profundidade_direita = 0
