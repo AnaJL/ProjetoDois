@@ -49,13 +49,13 @@ class No:
         return 1 + max(prof_esq, prof_dir)
 
     def rotacaoEsquerda(self):
-        self._dado, self._direita._dado = self._direita._dado, self._dado
+        self._dado, self._id, self._direita._dado, self._direita._id = self._direita._dado, self._direita._id, self._dado, self._id
         old_esquerda = self._esquerda
         self.setaFilhos(self._direita, self._direita._direita)
         self._esquerda.setaFilhos(old_esquerda, self._esquerda._esquerda)
 
     def rotacaoDireita(self):
-        self.data, self._esquerda._dado= self._esquerda._dado, self._dado
+        self._dado, self._id, self._esquerda._dado, self._esquerda._id = self._esquerda._dado, self._esquerda._id, self._dado, self._id
         old_direita = self._direita
         self.setaFilhos(self._esquerda._esquerda, self._esquerda)
         self._direita.setaFilhos(self._direita._direita, old_direita)
@@ -95,7 +95,8 @@ class No:
 
     def inserir(self, elem, pos):
         if self._dado == None:
-            self._dado = elem
+            self._dado = elem._dado
+            self._id = elem._id
         elif pos == 'inte':
             if elem._id < self._id:
                 if not self._esquerda:
@@ -108,29 +109,37 @@ class No:
                 else:
                     self._direita.inserir(elem, 'inte')
         elif pos == 'ext':
-            if elem._id < self._dado._id:
-                if not self._esquerda:
-                    self.set_esquerda(elem)
+            if self._dado._id:
+                if elem._id < self._dado._id:
+                    if not self._esquerda:
+                        self.set_esquerda(elem)
+                    else:
+                        self._esquerda.inserir(elem, 'inte')
                 else:
-                    self._esquerda.inserir(elem, 'inte')
+                    if not self._direita:
+                        self.set_direita(elem)
+                    else:
+                        self._direita.inserir(elem, 'inte')
             else:
-                if not self._direita:
-                    self.set_direita(elem)
-                else:
-                    self._direita.inserir(elem, 'inte')
+                self.inserir(elem, 'inte')
 
-            self.executaBalanco()
+        self.executaBalanco()
 
     def imprimeArvoreAvl(self, pos, espaco=10):
         if self._dado == None:
             print('Árvore Vazia !')
-        else:
-            if pos == 'ext':
+        elif pos == 'ext':
+            if self._dado._id == None:
+                self.imprimeArvoreAvl('int')
+            else:
                 print(" " * espaco + str(self._dado._id))
                 if self._esquerda:
                     self._esquerda.imprimeArvoreAvl('inter', espaco - 4)
-                if self._direita:
+                elif self._direita:
                     self._direita.imprimeArvoreAvl('inter', espaco + 4)
+        else:
+            if self._id == None:
+                    self.imprimeArvoreAvl('ext')
             else:
                 print(" " * espaco + str(self._id))
                 if self._esquerda:
@@ -184,8 +193,6 @@ class No:
 |_____________________________________________|
  ▸ Digite sua opção: 
 """)
-
-
 arv = No()
 resp = arv.menu()
 listachaves = []
