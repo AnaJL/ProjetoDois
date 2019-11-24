@@ -147,6 +147,57 @@ class No:
                 if self._direita:
                     self._direita.imprimeArvoreAvl('inter', espaco + 4)
 
+    def print(self, espaco = 0):
+        espaco = self.altura() * 8
+        espacomeio = 5
+        print(' ' * (espaco + 2) + str(self._id))
+        root = self
+        if root._esquerda:
+            if self._direita == None and self._esquerda == None:
+                return
+            else:
+                while self._esquerda != None and self._direita != None:
+                    espaco = espaco - 1
+                    print(' ' * espaco + str(self._esquerda._id) + ' ' * espacomeio + str(self._direita._id))
+                    self = self._esquerda
+                    if self._direita == None and self == None:
+                        break
+                while self._esquerda:
+                    espaco = espaco - 3
+                    print(' ' * espaco + str(self._esquerda._id) + ' ' * espacomeio + str('n'))
+                    self = self._esquerda
+                    if self._direita == None and self == None:
+                        break
+                while self._direita:
+                    espaco = espaco + 3
+                    print(' ' * espaco + str('n') + ' ' * espacomeio + str(self._direita._id))
+                    self = self._direita
+                    if self == None and self._esquerda == None:
+                        break
+        if root._direita:
+            self = root._direita
+            if self == None and self._esquerda == None:
+                return
+            else:
+                while self._esquerda != None and self._direita != None:
+                    espaco = espaco + 3
+                    print(' ' * espaco + str(self._esquerda._id) + ' ' * espacomeio + str(self._direita._id))
+                    self = self._esquerda
+                    if self._direita == None and self == None:
+                        break
+                while self._esquerda:
+                    espaco = espaco - 3
+                    print(' ' * espaco + str(self._esquerda._id) + ' ' * espacomeio + str('n'))
+                    self = self._esquerda
+                    if self._direita == None and self == None:
+                        break
+                while self._direita:
+                    espaco = espaco + 3
+                    print(' ' * espaco + str('n') + ' ' * espacomeio + str(self._direita._id))
+                    self = self._direita
+                    if self == None and self._esquerda == None:
+                        break
+
     def buscaid(self, chave, chaves, lista):
         Inf = 0
         Sup = len(chaves) - 1
@@ -225,7 +276,7 @@ while resp != '0':
     if resp == '5':
         print(arv.altura())
     if resp == '6':
-        arv.listaalt()
+        arv.print()
     if resp not in ['0', '1', '2', '3', '4', '5', '6']:
         print('✘ Comando invalido ✘')
     resp = arv.menu()
