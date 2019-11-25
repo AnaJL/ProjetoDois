@@ -150,14 +150,14 @@ class No:
     def print(self, espaco = 0):
         espaco = self.altura() * 8
         espacomeio = 5
-        print(' ' * (espaco + 2) + str(self._id))
+        print(' ' * (espaco) + str(self._id))
         root = self
         if root._esquerda:
             if self._direita == None and self._esquerda == None:
                 return
             else:
                 while self._esquerda != None and self._direita != None:
-                    espaco = espaco - 1
+                    espaco = espaco - 3
                     print(' ' * espaco + str(self._esquerda._id) + ' ' * espacomeio + str(self._direita._id))
                     self = self._esquerda
                     if self._direita == None and self == None:
@@ -180,19 +180,19 @@ class No:
                 return
             else:
                 while self._esquerda != None and self._direita != None:
-                    espaco = espaco + 3
+                    espaco = espaco + 6
                     print(' ' * espaco + str(self._esquerda._id) + ' ' * espacomeio + str(self._direita._id))
                     self = self._esquerda
                     if self._direita == None and self == None:
                         break
                 while self._esquerda:
-                    espaco = espaco - 3
+                    espaco = espaco + 6
                     print(' ' * espaco + str(self._esquerda._id) + ' ' * espacomeio + str('n'))
                     self = self._esquerda
                     if self._direita == None and self == None:
                         break
                 while self._direita:
-                    espaco = espaco + 3
+                    espaco = espaco + 6
                     print(' ' * espaco + str('n') + ' ' * espacomeio + str(self._direita._id))
                     self = self._direita
                     if self == None and self._esquerda == None:
