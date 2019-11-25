@@ -1,7 +1,12 @@
 from tkinter import*
-from rascunho import No
+from ArvoreAVL import No
 from Dados import Dado
 root = Tk()
+arv = No()
+listachaves = []
+listaanos = []
+listafilmes = []
+listaD = []
 root.title("Projeto Árvore AVL")
 root.geometry("280x200+600+250")
 def inserirFilme():
@@ -20,7 +25,7 @@ def inserirFilme():
     nome_Chave.pack()
     entrada3 = Entry(top)
     entrada3.pack()
-    botao_add = Button(top,text="Adicionar")
+    botao_add = Button(top,text="Adicionar", command= arv.inserir(Dado(entrada1.get(), entrada2.get()), entrada3.get()))
     botao_add.pack()
 
 def buscarFilmeId():
@@ -31,7 +36,7 @@ def buscarFilmeId():
     nome_Filme.pack()
     id = Entry(top)
     id.pack()
-    botao_Procura = Button(top,text="Buscar Filme pelo ID")
+    botao_Procura = Button(top,text="Buscar Filme pelo ID", command = text3.configure(arv.buscaid(id.get(), listachaves, listaD)))
     botao_Procura.pack()
 
 def buscarFilmeAno():
@@ -42,13 +47,13 @@ def buscarFilmeAno():
     nome_Filme.pack()
     ano = Entry(top)
     ano.pack()
-    botao_Procura_ano = Button(top, text="Buscar Filme pelo Ano")
+    botao_Procura_ano = Button(top, text="Buscar Filme pelo Ano", command = text3.configure((arv.buscaano(ano.get(), listachaves, listaD))))
     botao_Procura_ano.pack()
 
 def ordemAlfa():
-    text3.configure(text= "Ordem")
+    text3.configure(text= arv.OrdemAlfa(listafilmes))
 def Altura():
-    text3.configure(text= "Profundidade")
+    text3.configure(text= arv.altura())
 def exibir():
     text3.configure(text="Exibir")
 botao_sair = Button(text = "Sair", command = quit, width = 15)
