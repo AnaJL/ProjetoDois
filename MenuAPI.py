@@ -3,6 +3,7 @@ from rascunho import No
 from Dados import Dado
 root = Tk()
 root.title("Projeto Árvore AVL")
+root.geometry("280x200+600+250")
 def inserirFilme():
     top = Toplevel()
     top.geometry("300x200+500+300")
