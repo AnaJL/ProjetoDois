@@ -198,32 +198,17 @@ class No:
                     if self == None and self._esquerda == None:
                         break
 
+
     def buscaid(self, chave, chaves, lista):
-        Inf = 0
-        Sup = len(chaves) - 1
-        met = 0
-        while (Inf <= Sup):
-            met = (Inf + Sup) // 2
-            if (chaves[met] == chave):
-                return lista[met].get_filmeeano()
-            if (chave < chaves[met]):
-                Sup = met - 1
-            else:
-                Inf = met + 1
+        for i in range(len(chaves)):
+            if (chaves[i] == chave):
+                return lista[i].get_filmeeano()
         return 'Chave não encontrada'
+
     def buscaano(self, ano, anos, lista):
-        Inf = 0
-        Sup = len(anos) - 1
-        met = 0
-        while (Inf <= Sup):
-            met = (Inf + Sup) // 2
-            if (anos[met] == ano):
-                for i in range(anos.count(ano)-1):
-                    print(lista[met + i].get_filme())
-            if (ano < anos[met]):
-                Sup = met - 1
-            else:
-                Inf = met + 1
+        for i in range(len(anos)):
+            if (anos[i] == ano):
+                print(lista[i].get_filme())
         if ano not in anos:
             print('Chave não encontrada')
 
