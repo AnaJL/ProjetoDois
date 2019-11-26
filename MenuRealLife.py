@@ -1,6 +1,5 @@
 from Dados import Dado
-
-
+from time import sleep
 class No:
     def __init__(self, dado=None, ide=None, ):
         self._dado = dado
@@ -147,56 +146,59 @@ class No:
                 if self._direita:
                     self._direita.imprimeArvoreAvl('inter', espaco + 4)
 
-    def print(self, espaco = 0):
+    def print(self, espaco=0):
         espaco = self.altura() * 8
         espacomeio = 5
-        print(' ' * (espaco) + str(self._id))
-        root = self
-        if root._esquerda:
-            if self._direita == None and self._esquerda == None:
-                return
-            else:
-                while self._esquerda != None and self._direita != None:
-                    espaco = espaco - 3
-                    print(' ' * espaco + str(self._esquerda._id) + ' ' * espacomeio + str(self._direita._id))
-                    self = self._esquerda
-                    if self._direita == None and self == None:
-                        break
-                while self._esquerda:
-                    espaco = espaco - 3
-                    print(' ' * espaco + str(self._esquerda._id) + ' ' * espacomeio + str('n'))
-                    self = self._esquerda
-                    if self._direita == None and self == None:
-                        break
-                while self._direita:
-                    espaco = espaco + 3
-                    print(' ' * espaco + str('n') + ' ' * espacomeio + str(self._direita._id))
-                    self = self._direita
-                    if self == None and self._esquerda == None:
-                        break
-        if root._direita:
-            self = root._direita
-            if self == None and self._esquerda == None:
-                return
-            else:
-                while self._esquerda != None and self._direita != None:
-                    espaco = espaco + 6
-                    print(' ' * espaco + str(self._esquerda._id) + ' ' * espacomeio + str(self._direita._id))
-                    self = self._esquerda
-                    if self._direita == None and self == None:
-                        break
-                while self._esquerda:
-                    espaco = espaco + 6
-                    print(' ' * espaco + str(self._esquerda._id) + ' ' * espacomeio + str('n'))
-                    self = self._esquerda
-                    if self._direita == None and self == None:
-                        break
-                while self._direita:
-                    espaco = espaco + 6
-                    print(' ' * espaco + str('n') + ' ' * espacomeio + str(self._direita._id))
-                    self = self._direita
-                    if self == None and self._esquerda == None:
-                        break
+        if self.altura() == -1:
+            print('Árvore Vazia')
+        else:
+            print(' ' * (espaco) + str(self._id))
+            root = self
+            if root._esquerda:
+                if self._direita == None and self._esquerda == None:
+                    return
+                else:
+                    while self._esquerda != None and self._direita != None:
+                        espaco = espaco - 3
+                        print(' ' * espaco + str(self._esquerda._id) + ' ' * espacomeio + str(self._direita._id))
+                        self = self._esquerda
+                        if self._direita == None and self == None:
+                            break
+                    while self._esquerda:
+                        espaco = espaco - 3
+                        print(' ' * espaco + str(self._esquerda._id) + ' ' * espacomeio + str('n'))
+                        self = self._esquerda
+                        if self._direita == None and self == None:
+                            break
+                    while self._direita:
+                        espaco = espaco - 3
+                        print(' ' * espaco + str('n') + ' ' * espacomeio + str(self._direita._id))
+                        self = self._direita
+                        if self == None and self._esquerda == None:
+                            break
+            if root._direita:
+                self = root._direita
+                if self == None and self._esquerda == None:
+                    return
+                else:
+                    while self._esquerda != None and self._direita != None:
+                        espaco = espaco + 6
+                        print(' ' * espaco + str(self._esquerda._id) + ' ' * espacomeio + str(self._direita._id))
+                        self = self._esquerda
+                        if self._direita == None and self == None:
+                            break
+                    while self._esquerda:
+                        espaco = espaco + 6
+                        print(' ' * espaco + str(self._esquerda._id) + ' ' * espacomeio + str('n'))
+                        self = self._esquerda
+                        if self._direita == None and self == None:
+                            break
+                    while self._direita:
+                        espaco = espaco + 6
+                        print(' ' * espaco + str('n') + ' ' * espacomeio + str(self._direita._id))
+                        self = self._direita
+                        if self == None and self._esquerda == None:
+                            break
 
 
     def buscaid(self, chave, chaves, lista):
@@ -224,10 +226,10 @@ class No:
 \033[1;34m|\033[m \033[1;31m0) sair do Menu\033[m                             \033[1;34m|\033[m
 \033[1;34m|\033[m 1) Inserir filme                            \033[1;34m|\033[m
 \033[1;34m|\033[m 2) Buscar filme pelo id                     \033[1;34m|\033[m
-\033[1;34m|\033[m 3) Buscar filmes pelo ano   - TODO          \033[1;34m|\033[m
+\033[1;34m|\033[m 3) Buscar filmes pelo ano                   \033[1;34m|\033[m
 \033[1;34m|\033[m 4) Listar filmes em ordem alfabética        \033[1;34m|\033[m
 \033[1;34m|\033[m 5) Altura da árvore                         \033[1;34m|\033[m
-\033[1;34m|\033[m 6) Exibir a árvore  - TODO                  \033[1;34m|\033[m
+\033[1;34m|\033[m 6) Exibir a árvore                          \033[1;34m|\033[m
 \033[1;34m|_____________________________________________|\033[m
 \033[1;31m▸\033[m Digite sua opção: 
 """)
@@ -244,27 +246,35 @@ while resp != '0':
         chave = int(input('Chave: '))
         novo = No(Dado(filme, ano), chave)
         if chave in listachaves:
-            print(f'o ID {chave} já existe !')
+            print(f'\033[31mo ID {chave} já existe !\033[m')
+            sleep(1)
         else:
             listaD.append(Dado(filme, ano))
             listafilmes.append(filme)
             listachaves.append(chave)
             listaanos.append(ano)
             arv.inserir(novo, 'ext')
-            print('Adicionado com Sucesso !')
+            print('\033[32mAdicionado com Sucesso !\033[m')
+            sleep(1)
     if resp == '2':
         ide = int(input('ID procurado : '))
         print(arv.buscaid(ide, listachaves, listaD))
+        sleep(1)
     if resp == '3':
         ano = int(input('ANO procurado : '))
         arv.buscaano(ano, listaanos, listaD)
+        sleep(1)
     if resp == '4':
         arv.OrdemAlfa(listafilmes)
+        sleep(1)
     if resp == '5':
         print(arv.altura())
+        sleep(1)
     if resp == '6':
         arv.print()
+        sleep(1)
     if resp not in ['0', '1', '2', '3', '4', '5', '6']:
-        print('✘ Comando invalido ✘')
+        print('\033[31m✘ Comando invalido ✘\033[m')
+        sleep(1)
     resp = arv.menu()
 print('Fim')
