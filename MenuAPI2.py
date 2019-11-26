@@ -1,5 +1,5 @@
 from tkinter import*
-from TESTE import No
+from ArvoreAVL import No
 from Dados import Dado
 root = Tk()
 arv = No()
@@ -25,11 +25,7 @@ def inserirFilme():
     nome_Chave.pack()
     entrada3 = Entry(top)
     entrada3.pack()
-    botao_add = Button(top,text="Adicionar", command= arv.inserir(No(Dado(entrada1.get(), entrada2.get())), entrada3.get()))
-    listachaves.append(entrada3.get())
-    listaanos.append(entrada2.get())
-    listafilmes.append(entrada1.get())
-    listaD.append(Dado(entrada1.get(),entrada2.get()))
+    botao_add = Button(top,text="Adicionar", command= arv.inserir(No(Dado(entrada1.get(), entrada2.get()), entrada3.get()),'ext'))
     botao_add.pack()
 
 def buscarFilmeId():
@@ -40,7 +36,7 @@ def buscarFilmeId():
     nome_Filme.pack()
     id = Entry(top)
     id.pack()
-    botao_Procura = Button(top,text="Buscar Filme pelo ID", command = text3.configure(text = (arv.buscaid(id.get(), listachaves, listaD))))
+    botao_Procura = Button(top,text="Buscar Filme pelo ID", command = text3.configure(arv.buscaid(id.get(), listachaves, listaD)))
     botao_Procura.pack()
 
 def buscarFilmeAno():
@@ -51,7 +47,7 @@ def buscarFilmeAno():
     nome_Filme.pack()
     ano = Entry(top)
     ano.pack()
-    botao_Procura_ano = Button(top, text="Buscar Filme pelo Ano", command = text3.configure(text = (arv.buscaano(ano.get(), listaanos, listaD))))
+    botao_Procura_ano = Button(top, text="Buscar Filme pelo Ano", command = text3.configure((arv.buscaano(ano.get(), listachaves, listaD))))
     botao_Procura_ano.pack()
 
 def ordemAlfa():
@@ -59,7 +55,7 @@ def ordemAlfa():
 def Altura():
     text3.configure(text= arv.altura())
 def exibir():
-    text3.configure(text="Exibir")
+    text3.configure(text=arv.print())
 botao_sair = Button(text = "Sair", command = quit, width = 15)
 botao_sair.grid(column = 0, row = 1, padx = 10, pady = 5)
 
