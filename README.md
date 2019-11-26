@@ -1,7 +1,7 @@
 # ProjetoDois  02/12 (Faltam 06 dias)
 
 O que precisamos fazer :
-<H1>( 7 / 9 )</H1>
+<H1>( 7 / 8 )</H1>
 <div>(1) Inserir filme ----------------------- DONE</div>
 <div>(2) Buscar filme pelo id ---------------- DONE</div>
 <div>(3) Buscar filmes pelo ano -------------- DONE</div>
@@ -10,5 +10,5 @@ O que precisamos fazer :
 <div>(6) Exibir a árvore --------------------- TODO -> ver se tem como melhorar a impressão k</div> 
 <div>(7) Sair do programa -------------------- DONE</div>
 <div><br>Balanceamento ---------------------------- DONE</br></div>
-<div><br>Ligar ao tkinker ------------------------- TODO</br></div> 
+
 
