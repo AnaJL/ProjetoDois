@@ -1,6 +1,5 @@
 from Dados import Dado
 from time import sleep
-
 class No:
     def __init__(self, dado=None, ide=None, ):
         self._dado = dado
@@ -147,56 +146,59 @@ class No:
                 if self._direita:
                     self._direita.imprimeArvoreAvl('inter', espaco + 4)
 
-    def print(self, espaco = 0):
+    def print(self, espaco=0):
         espaco = self.altura() * 8
         espacomeio = 5
-        print(' ' * (espaco) + str(self._id))
-        root = self
-        if root._esquerda:
-            if self._direita == None and self._esquerda == None:
-                return
-            else:
-                while self._esquerda != None and self._direita != None:
-                    espaco = espaco - 3
-                    print(' ' * espaco + str(self._esquerda._id) + ' ' * espacomeio + str(self._direita._id))
-                    self = self._esquerda
-                    if self._direita == None and self == None:
-                        break
-                while self._esquerda:
-                    espaco = espaco - 3
-                    print(' ' * espaco + str(self._esquerda._id) + ' ' * espacomeio + str('n'))
-                    self = self._esquerda
-                    if self._direita == None and self == None:
-                        break
-                while self._direita:
-                    espaco = espaco + 3
-                    print(' ' * espaco + str('n') + ' ' * espacomeio + str(self._direita._id))
-                    self = self._direita
-                    if self == None and self._esquerda == None:
-                        break
-        if root._direita:
-            self = root._direita
-            if self == None and self._esquerda == None:
-                return
-            else:
-                while self._esquerda != None and self._direita != None:
-                    espaco = espaco + 6
-                    print(' ' * espaco + str(self._esquerda._id) + ' ' * espacomeio + str(self._direita._id))
-                    self = self._esquerda
-                    if self._direita == None and self == None:
-                        break
-                while self._esquerda:
-                    espaco = espaco + 6
-                    print(' ' * espaco + str(self._esquerda._id) + ' ' * espacomeio + str('n'))
-                    self = self._esquerda
-                    if self._direita == None and self == None:
-                        break
-                while self._direita:
-                    espaco = espaco + 6
-                    print(' ' * espaco + str('n') + ' ' * espacomeio + str(self._direita._id))
-                    self = self._direita
-                    if self == None and self._esquerda == None:
-                        break
+        if self.altura() == -1:
+            print('Árvore Vazia')
+        else:
+            print(' ' * (espaco) + str(self._id))
+            root = self
+            if root._esquerda:
+                if self._direita == None and self._esquerda == None:
+                    return
+                else:
+                    while self._esquerda != None and self._direita != None:
+                        espaco = espaco - 3
+                        print(' ' * espaco + str(self._esquerda._id) + ' ' * espacomeio + str(self._direita._id))
+                        self = self._esquerda
+                        if self._direita == None and self == None:
+                            break
+                    while self._esquerda:
+                        espaco = espaco - 3
+                        print(' ' * espaco + str(self._esquerda._id) + ' ' * espacomeio + str('n'))
+                        self = self._esquerda
+                        if self._direita == None and self == None:
+                            break
+                    while self._direita:
+                        espaco = espaco - 3
+                        print(' ' * espaco + str('n') + ' ' * espacomeio + str(self._direita._id))
+                        self = self._direita
+                        if self == None and self._esquerda == None:
+                            break
+            if root._direita:
+                self = root._direita
+                if self == None and self._esquerda == None:
+                    return
+                else:
+                    while self._esquerda != None and self._direita != None:
+                        espaco = espaco + 6
+                        print(' ' * espaco + str(self._esquerda._id) + ' ' * espacomeio + str(self._direita._id))
+                        self = self._esquerda
+                        if self._direita == None and self == None:
+                            break
+                    while self._esquerda:
+                        espaco = espaco + 6
+                        print(' ' * espaco + str(self._esquerda._id) + ' ' * espacomeio + str('n'))
+                        self = self._esquerda
+                        if self._direita == None and self == None:
+                            break
+                    while self._direita:
+                        espaco = espaco + 6
+                        print(' ' * espaco + str('n') + ' ' * espacomeio + str(self._direita._id))
+                        self = self._direita
+                        if self == None and self._esquerda == None:
+                            break
 
 
     def buscaid(self, chave, chaves, lista):
@@ -244,8 +246,7 @@ while resp != '0':
         chave = int(input('Chave: '))
         novo = No(Dado(filme, ano), chave)
         if chave in listachaves:
-            sleep(0.3)
-            print(f'\033[1;31mo ID {chave} já existe !\033[m')
+            print(f'o ID {chave} já existe !')
             sleep(1)
         else:
             listaD.append(Dado(filme, ano))
@@ -253,32 +254,26 @@ while resp != '0':
             listachaves.append(chave)
             listaanos.append(ano)
             arv.inserir(novo, 'ext')
-            sleep(0.3)
-            print('\033[32mAdicionado com Sucesso !\033[m')
+            print('Adicionado com Sucesso !')
             sleep(1)
     if resp == '2':
         ide = int(input('ID procurado : '))
-        sleep(0.3)
         print(arv.buscaid(ide, listachaves, listaD))
         sleep(1)
     if resp == '3':
         ano = int(input('ANO procurado : '))
-        sleep(0.3)
         arv.buscaano(ano, listaanos, listaD)
         sleep(1)
     if resp == '4':
-        sleep(0.3)
         arv.OrdemAlfa(listafilmes)
         sleep(1)
     if resp == '5':
-        sleep(0.3)
         print(arv.altura())
         sleep(1)
     if resp == '6':
-        sleep(0.3)
         arv.print()
         sleep(1)
     if resp not in ['0', '1', '2', '3', '4', '5', '6']:
-        print('\033[1;31m✘ Comando invalido ✘\033[m')
+        print('✘ Comando invalido ✘')
     resp = arv.menu()
 print('Fim')
