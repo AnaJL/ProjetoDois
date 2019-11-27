@@ -71,22 +71,23 @@ class ArvoreAVL:
         return altura_esquerda - altura_direita
 
     def inserir(self, no):   #Insere no
-        if self._raiz == None:
-            self._raiz = no
-        else:
-            p = self._raiz
-            q = p
-            while q != None:
-                if no.get_dado().get_nomeFilme() > p.get_dado().get_nomeFilme():
-                    p = q
-                    q = q.get_direita()
-                    p.set_direita(no)
+        if self._raiz != None:
+            r = self._raiz
+            p = r
+            while p != None:
+                if no.get_dado().get_nomeFilme() > r.get_dado().get_nomeFilme():
+                    r = p
+                    p = p.get_direita()
                 else:
-                    p = q
-                    q = q.get_esquerda()
-                    p.set_esquerda(no)
+                    r = p
+                    p = p.get_esquerda()
+            if no.get_dado().get_nomeFilme() > r.get_dado().get_nomeFilme():
+                r.set_direita(no)
+            else:
+                r.set_esquerda(no)
+        else:
+            self._raiz = no
         self.executaBalanco()
-
     def rotacaoEsquerda(self): #Rotação para Esquerda (Negativo)
         p = self._raiz
         aux = p.get_direita()
@@ -126,17 +127,17 @@ class ArvoreAVL:
     def buscar_Ano(self, ano, chaves): #Busca o Ano
         pass
 
-    def Altura(self, no): #Devolve a altura
+    def altura(self, no):
         p = no
         if p == None:
             return -1
-        if  p.get_esquerda() == None and p.get_direita() == None:
+        elif p.get_esquerda() == None and p.get_direita == None:
             return 0
         else:
-            if self.Altura(p.get_esquerda()) > self.Altura(p.get_direita()):
-                return 1 + self.Altura(p.get_esquerda())
+            if self.altura(p.get_esquerda()) > self.altura(p.get_direita()):
+                return 1 + self.altura(p.get_esquerda())
             else:
-                return 1 + self.Altura(p.get_direita())
+                return 1 + self.altura(p.get_direita())
 
     def OrdemAlfa(self, lista): #Deixa em ordem alfabetica
         if lista == []:
@@ -149,6 +150,7 @@ class ArvoreAVL:
             print('''ORDEM ALFABÉTICA: ''')
             for z in range(len(lista)):
                 print(lista[z])
+
     def menu(self): #Menu
         return input(""" 
 \033[31mI\033[m\033[32mFPB\033[m - \033[1;94mInstituto Federal da Paraiba \033[m
@@ -178,7 +180,8 @@ while resp != '0':
         ano = int(input('Ano: '))
         id = int(input('Chave:  '))
         if id in chaves:
-            id = int(input(f'C1have {id} já existe, digite outro! '))
+            id = int(input(f'C1have {id} já existe, '
+                           f'digite outra:  '))
         filme.inserir(No(Dado(nome, ano, id)))
         chaves.append(id)
         listafilmes.append(filme)
@@ -191,7 +194,7 @@ while resp != '0':
     elif resp == '4':
         print(filme.OrdemAlfa(listafilmes))
     elif resp == '5':
-        print(filme.Altura(filme.get_raiz()))
+        print(filme.altura(filme.get_raiz()))
     elif resp=='6':
         pass
     if resp not in ['0', '1', '2', '3', '4', '5', '6']:
