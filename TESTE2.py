@@ -23,7 +23,7 @@ class Dado:
         self._id = novoId
 
     def __str__(self):
-        f'nome: {self.get_nomeFilme()}ano: {self.get_ano} id: {self.get_id()}'
+        f'nome: {self.get_nomeFilme()}Id: {self.get_id} ano: {self.get_ano()}'
 class No:
     def __init__(self, dado,esquerda = None, direita = None):
         self._dado = dado
