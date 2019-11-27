@@ -18,19 +18,19 @@ class No:
     def balanco(self):
         prof_esq = 0
         if self._esquerda:
-            prof_esq = self._esquerda.profundidade()
+            prof_esq = self._esquerda.alturaBalanco()
         prof_dir = 0
         if self._direita:
-            prof_dir = self._direita.profundidade()
+            prof_dir = self._direita.alturaBalanco()
         return prof_esq - prof_dir
 
-    def profundidade(self):
+    def alturaBalanco(self):
         prof_esq = 0
         if self._esquerda:
-            prof_esq = self._esquerda.profundidade()
+            prof_esq = self._esquerda.alturaBalanco()
         prof_dir = 0
         if self._direita:
-            prof_dir = self._direita.profundidade()
+            prof_dir = self._direita.alturaBalanco()
         return 1 + max(prof_esq, prof_dir)
 
     def altura(self):
@@ -48,16 +48,18 @@ class No:
             return 1 + max(alt_esq, alt_dir)
 
     def rotacaoEsquerda(self):
-        self._dado, self._id, self._direita._dado, self._direita._id = self._direita._dado, self._direita._id, self._dado, self._id
-        old_esquerda = self._esquerda
-        self.setaFilhos(self._direita, self._direita._direita)
-        self._esquerda.setaFilhos(old_esquerda, self._esquerda._esquerda)
+        sd = self._direita
+        self._dado, self._id, sd._dado, sd._id = sd._dado, sd._id, self._dado, self._id
+        esqant = self._esquerda
+        self.setaFilhos(sd, sd._direita)
+        self._esquerda.setaFilhos(esqant, self._esquerda._esquerda)
 
     def rotacaoDireita(self):
-        self._dado, self._id, self._esquerda._dado, self._esquerda._id= self._esquerda._dado, self._esquerda._id, self._dado, self._id
-        old_direita = self._direita
-        self.setaFilhos(self._esquerda._esquerda, self._esquerda)
-        self._direita.setaFilhos(self._direita._direita, old_direita)
+        se = self._esquerda
+        self._dado, self._id, se._dado, se._id= se._dado, se._id, self._dado, self._id
+        dirant = self._direita
+        self.setaFilhos(se._esquerda, se)
+        self._direita.setaFilhos(self._direita._direita, dirant)
 
     def rotacaoEsquerdaDireita(self):
         self._esquerda.rotacaoEsquerda()
@@ -109,7 +111,7 @@ class No:
         self.executaBalanco()
 
     def print(self, espaco=0):
-        espaco = self.profundidade() * 6
+        espaco = self.alturaBalanco() * 6
         espacomeio = 5
         if self.altura() == -1:
             print('Árvore Vazia')
