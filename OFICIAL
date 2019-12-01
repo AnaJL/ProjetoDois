@@ -147,10 +147,10 @@ class No:
                         espaco = espaco + 9
                         print(' ' * espaco + str(selfd._esquerda._id) + ' ' * espacomeio + str('n'))
                 if self._esquerda:
-                    espaco = espaco - 9
+                    espaco = espaco - 12
                     print(' ' * espaco + str(self._esquerda._id) + ' ' * espacomeio + str('n'))
                 if self._direita:
-                    espaco = espaco - 9
+                    espaco = espaco - 12
                     print(' ' * espaco + str('n') + ' ' * espacomeio + str(self._direita._id))
             if root._direita:
                 self = root._direita
