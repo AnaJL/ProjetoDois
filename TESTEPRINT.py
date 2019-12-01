@@ -3,9 +3,9 @@ class No:
     def __init__(self, dado=None, ide=None, ):
         self._dado = dado
         self._id = ide
-        self.setaFilhos(None, None)
+        self.apontarFilhos(None, None)
 
-    def setaFilhos(self, esquerda, direita):  #Aponta para os filhos
+    def apontarFilhos(self, esquerda, direita):  #Aponta para os filhos
         self._esquerda = esquerda
         self._direita = direita
 
@@ -51,15 +51,15 @@ class No:
         sd = self._direita
         self._dado, self._id, sd._dado, sd._id = sd._dado, sd._id, self._dado, self._id
         esqant = self._esquerda
-        self.setaFilhos(sd, sd._direita)
-        self._esquerda.setaFilhos(esqant, self._esquerda._esquerda)
+        self.apontarFilhos(sd, sd._direita)
+        self._esquerda.apontarFilhos(esqant, self._esquerda._esquerda)
 
     def rotacaoDireita(self): #Rotação para direita (positivo)
         se = self._esquerda
         self._dado, self._id, se._dado, se._id = se._dado, se._id, self._dado, self._id
         dirant = self._direita
-        self.setaFilhos(se._esquerda, se)
-        self._direita.setaFilhos(self._direita._direita, dirant)
+        self.apontarFilhos(se._esquerda, se)
+        self._direita.apontarFilhos(self._direita._direita, dirant)
 
     def rotacaoEsquerdaDireita(self):
         self._esquerda.rotacaoEsquerda()
@@ -207,10 +207,10 @@ class No:
 \033[1;34m|\033[m \033[1;31m0) sair do Menu\033[m                             \033[1;34m|\033[m
 \033[1;34m|\033[m 1) Inserir filme                            \033[1;34m|\033[m
 \033[1;34m|\033[m 2) Buscar filme pelo id                     \033[1;34m|\033[m
-\033[1;34m|\033[m 3) Buscar filmes pelo ano   - TODO          \033[1;34m|\033[m
+\033[1;34m|\033[m 3) Buscar filmes pelo ano                   \033[1;34m|\033[m
 \033[1;34m|\033[m 4) Listar filmes em ordem alfabética        \033[1;34m|\033[m
 \033[1;34m|\033[m 5) Altura da árvore                         \033[1;34m|\033[m
-\033[1;34m|\033[m 6) Exibir a árvore  - TODO                  \033[1;34m|\033[m
+\033[1;34m|\033[m 6) Exibir a árvore                          \033[1;34m|\033[m
 \033[1;34m|_____________________________________________|\033[m
 \033[1;31m▸\033[m Digite sua opção: 
 """)
