@@ -129,57 +129,57 @@ class No:
                 print(' ')
                 print(' Lado Esquerdo: ')
                 if root._esquerda and not root._direita:
-                    espaco = espaco - 3
+                    espaco = espaco - 6
                     print(' ' * espaco + str(root._esquerda._id) + ' ' * espacomeio + str('n'))
                 while self._esquerda != None and self._direita != None:
-                    espaco = espaco - 6
+                    espaco = espaco - 12
                     print(' ' * espaco + str(self._esquerda._id) + ' ' * espacomeio + str(self._direita._id))
                     selfd = self._direita
                     self = self._esquerda
                     while selfd._esquerda != None and selfd._direita != None:
-                        espaco = espaco + 6
+                        espaco = espaco + 9
                         print(' ' * espaco + str(selfd._esquerda._id) + ' ' * espacomeio + str(selfd._direita._id))
                         selfd = selfd._direita
                     if selfd._direita:
-                        espaco = espaco + 6
+                        espaco = espaco + 9
                         print(' ' * espaco + str('n') + ' ' * espacomeio + str(selfd._direita._id))
                     if selfd._esquerda:
-                        espaco = espaco + 6
+                        espaco = espaco + 9
                         print(' ' * espaco + str(selfd._esquerda._id) + ' ' * espacomeio + str('n'))
                 if self._esquerda:
-                    espaco = espaco - 6
+                    espaco = espaco - 9
                     print(' ' * espaco + str(self._esquerda._id) + ' ' * espacomeio + str('n'))
                 if self._direita:
-                    espaco = espaco - 6
+                    espaco = espaco - 9
                     print(' ' * espaco + str('n') + ' ' * espacomeio + str(self._direita._id))
             if root._direita:
                 self = root._direita
                 print(' ')
                 print(' Lado Direito: ')
                 if root._direita and not root._esquerda:
-                    espaco = espaco - 3
+                    espaco = espaco - 6
                     print(' ' * espaco + str('n') + ' ' * espacomeio + str(root._direita._id))
                 while self._esquerda != None and self._direita != None:
-                    espaco = espaco + 6
+                    espaco = espaco + 9
                     print(' ' * espaco + str(self._esquerda._id) + ' ' * espacomeio + str(self._direita._id))
                     selfe = self._esquerda
                     self = self._direita
                     while selfe._esquerda != None and selfe._direita != None:
-                        espaco = espaco - 3
+                        espaco = espaco - 6
                         print(' ' * espaco + str(selfe._esquerda._id) + ' ' * espacomeio + str(selfe._direita._id))
                         selfe = selfe._direita
                     if selfe._direita:
-                        espaco = espaco - 3
+                        espaco = espaco - 6
                         print(' ' * espaco + str('n') + ' ' * espacomeio + str(selfe._direita._id))
                     if selfe._esquerda:
-                        espaco = espaco -3
+                        espaco = espaco - 6
                         print(' ' * espaco + str(selfe._esquerda._id) + ' ' * espacomeio + str('n'))
 
                 if self._direita:
-                    espaco = espaco + 6
+                    espaco = espaco + 9
                     print(' ' * espaco + str('n') + ' ' * espacomeio + str(self._direita._id))
                 if self._esquerda:
-                    espaco = espaco + 6
+                    espaco = espaco + 9
                     print(' ' * espaco + str(self._esquerda._id) + ' ' * espacomeio + str('n'))
 
     def buscaid(self, chave, chaves, lista): #Busca o id de forma sequencial
