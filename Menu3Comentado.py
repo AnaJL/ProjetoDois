@@ -1,15 +1,15 @@
-rom Dados import Dado
+from Dados import Dado
 class No:
     def __init__(self, dado=None, ide=None, ):
         self._dado = dado
         self._id = ide
-        self.setaFilhos(None, None)
+        self.apontaFilhos(None, None)
 
-    def setaFilhos(self, esquerda, direita):  #Aponta para os filhos 
+    def apontaFilhos(self, esquerda, direita):  #Aponta para os filhos
         self._esquerda = esquerda
         self._direita = direita
 
-    def set_esquerda(self, novo): #altera a esquerda 
+    def set_esquerda(self, novo): #altera a esquerda
         self._esquerda = novo
 
     def set_direita(self, novo): #Altera a direita
@@ -24,7 +24,7 @@ class No:
             prof_dir = self._direita.alturaBalanco()
         return prof_esq - prof_dir
 
-    def alturaBalanco(self):  #Altura(profundidade) utilizada no balancemaneto 
+    def alturaBalanco(self):  #Altura(profundidade) utilizada no balancemaneto
         prof_esq = 0
         if self._esquerda:
             prof_esq = self._esquerda.alturaBalanco()
@@ -33,7 +33,7 @@ class No:
             prof_dir = self._direita.alturaBalanco()
         return 1 + max(prof_esq, prof_dir)
 
-    def altura(self): #Altura da árvore 
+    def altura(self): #Altura da árvore
         if self._dado == None:
             return -1
         elif self._esquerda == None and self._direita == None:
@@ -51,15 +51,15 @@ class No:
         sd = self._direita
         self._dado, self._id, sd._dado, sd._id = sd._dado, sd._id, self._dado, self._id
         esqant = self._esquerda
-        self.setaFilhos(sd, sd._direita)
-        self._esquerda.setaFilhos(esqant, self._esquerda._esquerda)
+        self.apontaFilhos(sd, sd._direita)
+        self._esquerda.apontaFilhos(esqant, self._esquerda._esquerda)
 
     def rotacaoDireita(self): #Rotação para direita (positivo)
         se = self._esquerda
         self._dado, self._id, se._dado, se._id = se._dado, se._id, self._dado, self._id
         dirant = self._direita
-        self.setaFilhos(se._esquerda, se)
-        self._direita.setaFilhos(self._direita._direita, dirant)
+        self.apontaFilhos(se._esquerda, se)
+        self._direita.apontaFilhos(self._direita._direita, dirant)
 
     def rotacaoEsquerdaDireita(self):
         self._esquerda.rotacaoEsquerda()
@@ -95,7 +95,7 @@ class No:
             for z in range(len(lista)):
                 print(lista[z])
 
-    def inserir(self, elem):  #Insere o nó na árvore 
+    def inserir(self, elem):  #Insere o nó na árvore
         if self._dado == None:
             self._dado = elem._dado
             self._id = elem._id
@@ -109,9 +109,9 @@ class No:
                 self.set_direita(elem)
             else:
                 self._direita.inserir(elem)
-        self.executaBalanco()  #Executa o balanceamento depois da inserção 
+        self.executaBalanco()  #Executa o balanceamento depois da inserção
 
-    def print(self, espaco=0): #Printa a árvore 
+    def print(self, espaco=0): #Printa a árvore
         espaco = self.alturaBalanco() * 6
         espacomeio = 5
         root = self
