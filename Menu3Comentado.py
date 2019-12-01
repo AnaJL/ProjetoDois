@@ -184,10 +184,10 @@ class No:
 \033[1;34m|\033[m \033[1;31m0) sair do Menu\033[m                             \033[1;34m|\033[m
 \033[1;34m|\033[m 1) Inserir filme                            \033[1;34m|\033[m
 \033[1;34m|\033[m 2) Buscar filme pelo id                     \033[1;34m|\033[m
-\033[1;34m|\033[m 3) Buscar filmes pelo ano   - TODO          \033[1;34m|\033[m
+\033[1;34m|\033[m 3) Buscar filmes pelo ano                   \033[1;34m|\033[m
 \033[1;34m|\033[m 4) Listar filmes em ordem alfabética        \033[1;34m|\033[m
 \033[1;34m|\033[m 5) Altura da árvore                         \033[1;34m|\033[m
-\033[1;34m|\033[m 6) Exibir a árvore  - TODO                  \033[1;34m|\033[m
+\033[1;34m|\033[m 6) Exibir a árvore                          \033[1;34m|\033[m
 \033[1;34m|_____________________________________________|\033[m
 \033[1;31m▸\033[m Digite sua opção: 
 """)
