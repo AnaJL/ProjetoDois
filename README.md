@@ -1,4 +1,4 @@
-# ProjetoDois  02/12 (Faltam 03 dias)
+# ProjetoDois  02/12 Amanhã
 
 O que precisamos fazer :
 <H1>( 8 / 8 )</H1> <h1>TE DISSE !!! :D</h1>
